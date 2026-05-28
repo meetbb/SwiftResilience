@@ -10,24 +10,15 @@ import XCTest
 
 // MARK: - Test doubles
 
-/// A minimal `NetworkRequest` for use in tests.
-///
-/// Defined here, not in production code, because it's a test utility.
-/// Real consumers create their own concrete request types.
+// A bare-minimum NetworkRequest for tests.
 private struct StubRequest: NetworkRequest {
     let url: URL
     var method: HTTPMethod = .get
 }
 
-/// A controllable stand-in for `URLSession`.
-///
-/// Each `responses` entry is consumed in order. Once all entries are
-/// consumed, calling `data(for:)` again will crash with an index
-/// out-of-bounds — which is intentional: a test that fires more
-/// requests than it expected should fail loudly.
-///
-/// `@unchecked Sendable` is safe here because `MockNetworkSession` is
-/// only ever used from one concurrency context in tests.
+// Feeds pre-baked responses to the engine one by one.
+// If more requests are made than entries provided, it crashes loudly —
+// which is intentional so tests don't silently pass with extra calls.
 private final class MockNetworkSession: NetworkSession, @unchecked Sendable {
 
     struct Entry {
@@ -36,24 +27,19 @@ private final class MockNetworkSession: NetworkSession, @unchecked Sendable {
     }
 
     private var entries: [Entry]
-    private var callIndex = 0
+    private(set) var callCount = 0
 
-    /// Designated initialiser for success/HTTP-error scenarios.
     init(entries: [Entry]) {
         self.entries = entries
     }
 
-    /// Convenience for a single successful 200 response.
     convenience init(data: Data = Data(), statusCode: Int = 200) {
         self.init(entries: [Entry(data: data, statusCode: statusCode)])
     }
 
-    var requestsReceived: [URLRequest] = []
-
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
-        requestsReceived.append(request)
-        let entry = entries[callIndex]
-        callIndex += 1
+        let entry = entries[callCount]
+        callCount += 1
         let response = HTTPURLResponse(
             url: request.url!,
             statusCode: entry.statusCode,
@@ -64,7 +50,7 @@ private final class MockNetworkSession: NetworkSession, @unchecked Sendable {
     }
 }
 
-/// A session that always throws a given error.
+// Always throws the given error. Useful for connection/timeout scenarios.
 private final class FailingNetworkSession: NetworkSession, @unchecked Sendable {
     let error: Error
     private(set) var callCount = 0
@@ -77,6 +63,32 @@ private final class FailingNetworkSession: NetworkSession, @unchecked Sendable {
     }
 }
 
+// Tracks how many times data(for:) was called across concurrent requests.
+// Used in deduplication tests to confirm only one network call was made.
+private final class CountingNetworkSession: NetworkSession, @unchecked Sendable {
+    private(set) var callCount = 0
+    let responseData: Data
+    let statusCode: Int
+
+    init(data: Data = Data("ok".utf8), statusCode: Int = 200) {
+        self.responseData = data
+        self.statusCode = statusCode
+    }
+
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        callCount += 1
+        // Small delay so concurrent callers actually overlap in time.
+        try await Task.sleep(nanoseconds: 10_000_000) // 10ms
+        let response = HTTPURLResponse(
+            url: request.url!,
+            statusCode: statusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        return (responseData, response)
+    }
+}
+
 // MARK: - Tests
 
 final class AsyncRequestEngineTests: XCTestCase {
@@ -86,21 +98,19 @@ final class AsyncRequestEngineTests: XCTestCase {
     // MARK: Success
 
     func testSuccessfulRequestReturnsData() async throws {
-        let expectedData = Data("hello".utf8)
-        let session = MockNetworkSession(data: expectedData, statusCode: 200)
-        let engine  = AsyncRequestEngine(session: session)
+        let expected = Data("hello".utf8)
+        let session  = MockNetworkSession(data: expected, statusCode: 200)
+        let engine   = AsyncRequestEngine(session: session)
 
         let (data, response) = try await engine.send(StubRequest(url: testURL))
 
-        XCTAssertEqual(data, expectedData)
+        XCTAssertEqual(data, expected)
         XCTAssertEqual(response.statusCode, 200)
-        XCTAssertEqual(session.requestsReceived.count, 1)
     }
 
     // MARK: HTTP errors
 
-    func testPermanent4xxThrowsImmediatelyWithoutRetry() async throws {
-        // 401 Unauthorized is a client error — retrying won't change the outcome.
+    func testPermanent4xxThrowsWithoutRetry() async throws {
         let session = MockNetworkSession(statusCode: 401)
         let engine  = AsyncRequestEngine(
             session: session,
@@ -109,19 +119,15 @@ final class AsyncRequestEngineTests: XCTestCase {
 
         do {
             _ = try await engine.send(StubRequest(url: testURL))
-            XCTFail("Expected httpError to be thrown")
+            XCTFail("Expected an error")
         } catch NetworkError.httpError(let statusCode, _) {
             XCTAssertEqual(statusCode, 401)
-            // Only 1 attempt — policy was never consulted.
-            XCTAssertEqual(session.requestsReceived.count, 1)
+            XCTAssertEqual(session.callCount, 1) // no retries
         }
     }
 
-    func testTransient503RetriesUpToMaxAndThenThrows() async throws {
-        // Server returns 503 on every attempt → should exhaust policy (3 retries)
-        // and throw on the 4th attempt (attempts 0, 1, 2 retry; attempt 3 is final).
-        let entries = Array(repeating: MockNetworkSession.Entry(data: Data(), statusCode: 503),
-                            count: 4)
+    func testTransient503ExhaustsRetriesAndThrows() async throws {
+        let entries = Array(repeating: MockNetworkSession.Entry(data: Data(), statusCode: 503), count: 4)
         let session = MockNetworkSession(entries: entries)
         let engine  = AsyncRequestEngine(
             session: session,
@@ -130,16 +136,14 @@ final class AsyncRequestEngineTests: XCTestCase {
 
         do {
             _ = try await engine.send(StubRequest(url: testURL))
-            XCTFail("Expected httpError to be thrown after retries")
+            XCTFail("Expected an error")
         } catch NetworkError.httpError(let statusCode, _) {
             XCTAssertEqual(statusCode, 503)
-            // 1 initial attempt + 3 retries = 4 total requests.
-            XCTAssertEqual(session.requestsReceived.count, 4)
+            XCTAssertEqual(session.callCount, 4) // 1 initial + 3 retries
         }
     }
 
     func testSucceedsAfterOneRetry() async throws {
-        // First attempt fails with 503; second succeeds with 200.
         let entries: [MockNetworkSession.Entry] = [
             .init(data: Data(), statusCode: 503),
             .init(data: Data("ok".utf8), statusCode: 200)
@@ -154,25 +158,24 @@ final class AsyncRequestEngineTests: XCTestCase {
 
         XCTAssertEqual(response.statusCode, 200)
         XCTAssertEqual(data, Data("ok".utf8))
-        XCTAssertEqual(session.requestsReceived.count, 2)
+        XCTAssertEqual(session.callCount, 2)
     }
 
     // MARK: Network errors
 
-    func testNoConnectionWithoutPolicyThrowsImmediately() async throws {
+    func testNoConnectionWithNoPolicyThrowsImmediately() async throws {
         let session = FailingNetworkSession(error: URLError(.notConnectedToInternet))
-        let engine  = AsyncRequestEngine(session: session) // no retry policy
+        let engine  = AsyncRequestEngine(session: session)
 
         do {
             _ = try await engine.send(StubRequest(url: testURL))
-            XCTFail("Expected noConnection to be thrown")
+            XCTFail("Expected an error")
         } catch NetworkError.noConnection {
             XCTAssertEqual(session.callCount, 1)
         }
     }
 
     func testNoConnectionRetriesWithPolicy() async throws {
-        // 3 connection failures → policy exhausted → throws .noConnection
         let session = FailingNetworkSession(error: URLError(.notConnectedToInternet))
         let engine  = AsyncRequestEngine(
             session: session,
@@ -181,16 +184,13 @@ final class AsyncRequestEngineTests: XCTestCase {
 
         do {
             _ = try await engine.send(StubRequest(url: testURL))
-            XCTFail("Expected noConnection to be thrown after retries")
+            XCTFail("Expected an error")
         } catch NetworkError.noConnection {
-            // 1 initial + 3 retries = 4 total calls.
-            XCTAssertEqual(session.callCount, 4)
+            XCTAssertEqual(session.callCount, 4) // 1 initial + 3 retries
         }
     }
 
-    // MARK: Cancellation
-
-    func testCancelledTaskThrowsCancelledError() async throws {
+    func testCancelledErrorIsNotRetried() async throws {
         let session = FailingNetworkSession(error: URLError(.cancelled))
         let engine  = AsyncRequestEngine(
             session: session,
@@ -199,10 +199,44 @@ final class AsyncRequestEngineTests: XCTestCase {
 
         do {
             _ = try await engine.send(StubRequest(url: testURL))
-            XCTFail("Expected cancelled to be thrown")
+            XCTFail("Expected an error")
         } catch NetworkError.cancelled {
-            // Cancellation should NOT trigger retries — only 1 call.
-            XCTAssertEqual(session.callCount, 1)
+            XCTAssertEqual(session.callCount, 1) // cancelled = no retries
         }
+    }
+
+    // MARK: Deduplication
+
+    func testIdenticalConcurrentRequestsShareOneNetworkCall() async throws {
+        let session = CountingNetworkSession()
+        let engine  = AsyncRequestEngine(session: session)
+        let request = StubRequest(url: testURL)
+
+        // Fire the same request from three concurrent tasks.
+        async let r1 = engine.send(request)
+        async let r2 = engine.send(request)
+        async let r3 = engine.send(request)
+
+        let results = try await [r1.0, r2.0, r3.0]
+
+        // All three should get the same data back.
+        XCTAssertTrue(results.allSatisfy { $0 == Data("ok".utf8) })
+        // But the network should have been hit only once.
+        XCTAssertEqual(session.callCount, 1)
+    }
+
+    func testDifferentRequestsDoNotShareTasks() async throws {
+        let urlA = URL(string: "https://example.com/a")!
+        let urlB = URL(string: "https://example.com/b")!
+        let session = CountingNetworkSession()
+        let engine  = AsyncRequestEngine(session: session)
+
+        async let r1 = engine.send(StubRequest(url: urlA))
+        async let r2 = engine.send(StubRequest(url: urlB))
+
+        _ = try await (r1, r2)
+
+        // Different URLs = different identities = two separate network calls.
+        XCTAssertEqual(session.callCount, 2)
     }
 }

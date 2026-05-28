@@ -17,6 +17,46 @@ so every piece can be understood, tested, and explained in isolation.
 
 ## Changelog
 
+### 28 May 2026 — Request Deduplication
+
+**Files added:**
+- `Networking/RequestIdentity.swift`
+
+**Files updated:**
+- `Networking/AsyncRequestEngine.swift`
+- `Tests/Networking/AsyncRequestEngineTests.swift`
+
+**What was built:**
+
+If two parts of the app call `send(_:)` with the same request at the same time,
+the engine now fires the network call only once and delivers the result to both
+callers when it completes. This prevents redundant bandwidth usage and duplicate
+side effects on the server side.
+
+`RequestIdentity` is an internal `Hashable` struct that captures the url, method,
+headers, and body of a request. Timeout is excluded — two calls to the same
+endpoint with different timeouts are still the same request from a deduplication
+standpoint. This struct is the dictionary key.
+
+`AsyncRequestEngine` now holds a private `inFlightTasks` dictionary mapping
+`RequestIdentity` to a `Task<(Data, HTTPURLResponse), Error>`. When `send(_:)` is
+called, it checks whether a task for that identity already exists. If it does, it
+awaits the existing task's value directly — no new network call. If not, it creates
+a task, stores it, and defers its removal once the task settles. Because the engine
+is an actor, the dictionary check and the task insertion happen atomically (before
+any `await`), so there is no window for two callers to race past the check and each
+create their own task.
+
+The retry loop was extracted into a private `executeWithRetry` method to keep the
+deduplication logic in `send` easy to read.
+
+**Test coverage:**
+- Three concurrent identical requests result in exactly one network call, and all
+  three callers receive the same response.
+- Two concurrent requests to different URLs each trigger their own network call.
+
+---
+
 ### 28 May 2026 — Async Request Engine
 
 **Files added:**
@@ -115,12 +155,7 @@ hit the server in a wave; staggered delays spread that load out.
 The following modules are planned in implementation order.
 Each builds on the layer below it.
 
-1. **Request Deduplication** — if two parts of the app fire identical requests
-   simultaneously, the engine executes once and delivers the result to both
-   callers. Requires in-flight task tracking inside `AsyncRequestEngine` (the
-   actor boundary is already in place for this).
-
-2. **Offline Queue Engine** — persists failed requests to disk and replays them
+1. **Offline Queue Engine** — persists failed requests to disk and replays them
    when connectivity is restored. Requires a persistence layer (Core Data or
    file-backed queue) and a network reachability monitor.
 
@@ -146,7 +181,8 @@ Each builds on the layer below it.
 ├─────────────────────────────────────┤
 │     Concurrency Safety Layer        │  (planned)
 ├─────────────────────────────────────┤
-│     AsyncRequestEngine    ✓         │  actor — drives requests + retry loop
+│     AsyncRequestEngine    ✓         │  actor — requests, retry, deduplication
+│     RequestIdentity       ✓         │  hashable key for in-flight task tracking
 │     NetworkRequest        ✓         │  protocol — describes what to request
 │     NetworkError          ✓         │  typed errors + isRetryable
 │     NetworkSession        ✓         │  URLSession abstraction for testability
