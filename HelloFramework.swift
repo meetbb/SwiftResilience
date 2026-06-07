@@ -10,6 +10,6 @@ public struct HelloFramework {
     public init() {}
     
     public func greet() -> String {
-        return "Framework loaded"
+        return "Framework loaded!"
     }
 }
