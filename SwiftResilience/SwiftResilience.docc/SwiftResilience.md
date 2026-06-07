@@ -17,6 +17,121 @@ so every piece can be understood, tested, and explained in isolation.
 
 ## Changelog
 
+### 7 Jun 2026 — Offline Queue Engine
+
+**Files added:**
+- `OfflineQueue/QueueableRequest.swift`
+- `OfflineQueue/QueueEntry.swift`
+- `OfflineQueue/DiskQueueStore.swift`
+- `OfflineQueue/ReachabilityMonitor.swift`
+- `OfflineQueue/OfflineQueueEngine.swift`
+- `Tests/OfflineQueue/QueueableRequestTests.swift`
+- `Tests/OfflineQueue/QueueEntryTests.swift`
+- `Tests/OfflineQueue/DiskQueueStoreTests.swift`
+- `Tests/OfflineQueue/ReachabilityMonitorTests.swift`
+- `Tests/OfflineQueue/OfflineQueueEngineTests.swift`
+
+**What was built:**
+
+A complete offline-first delivery layer built in five focused pieces, each
+independently tested before the next was started.
+
+`QueueableRequest` extends `NetworkRequest` with three properties the queue
+needs: `ttl` (how long to keep the entry on disk), `priority` (drain ordering
+weight), and `idempotencyKey` (stable fingerprint for server-side deduplication
+on replay). All three have default implementations via a protocol extension so
+conforming types require zero extra code in the common case. `QueuePriority` is
+a `Comparable` enum with raw `Int` values (`normal = 0`, `high = 1`,
+`critical = 2`) so sorted collections work without custom comparators.
+
+`QueueEntry` is a `Codable`, `Equatable` struct — the unit of storage. It
+snapshots every field of the request into primitive types (`method` as a raw
+`String`, `priority` as a raw `Int`) rather than storing the protocol directly.
+This sidesteps the existential-Codable problem and produces a stable, human-
+readable JSON format that survives app updates and enum reorderings. A computed
+`isExpired` property evaluates TTL on demand so `DiskQueueStore` never holds
+stale state. `asURLRequest()` reconstructs the `URLRequest` and injects the
+`Idempotency-Key` header at drain time.
+
+`DiskQueueStore` is an actor that writes one JSON file per entry to
+`Application Support/SwiftResilience/OfflineQueue/`. File-per-entry means
+atomic writes and deletes — no global lock, no read-modify-write on a single
+queue file. `save` overwrites on duplicate IDs (safe retry after a partial
+write). `load` decodes all `.json` files, silently skips corrupt ones, filters
+expired entries, and returns results sorted by priority descending then
+`enqueuedAt` ascending (causal FIFO within a priority tier). `deleteExpired`
+is a separate sweep called at the start of each drain cycle. `count` includes
+expired entries so the `maxQueueSize` cap accounts for entries not yet swept.
+
+`ReachabilityMonitoring` is an actor protocol exposing `isConnected: Bool` and
+`connectivity: AsyncStream<Bool>`. `NetworkReachabilityMonitor` implements it
+using `NWPathMonitor` on a private `DispatchQueue`. Path updates are dispatched
+back onto the actor via an unstructured `Task` to keep actor isolation intact.
+The monitor fires its handler immediately on `start(queue:)` so `isConnected`
+reflects real state within one event-loop tick. The protocol boundary keeps
+`OfflineQueueEngine` fully testable — `MockReachabilityMonitor` (in the test
+target) is the controllable stand-in used throughout the engine tests.
+
+`OfflineQueueEngine` is the main actor. It wires the three pieces above together
+with `AsyncRequestEngine` into a two-path delivery model:
+
+- **Fast path** — if `reachabilityMonitor.isConnected`, attempt an immediate
+  `AsyncRequestEngine.send`. On success nothing is written to disk. On
+  `.noConnection` or `.timedOut` the request falls through to the queue path.
+  Any other error (4xx, cancellation) is rethrown directly — it signals a
+  problem the server returned, not a connectivity gap, so queuing would not help.
+- **Queue path** — `maxQueueSize` is enforced, the request is snapshotted into
+  a `QueueEntry`, and written to `DiskQueueStore`.
+
+The drain loop (started via `start()`) iterates `reachabilityMonitor.connectivity`
+and calls `runDrainCycle()` on every `true` event. A cycle sweeps expired entries,
+loads surviving entries in priority-FIFO order, and sends each through
+`AsyncRequestEngine` via a private `QueueEntryRequest` adapter. Successfully
+sent entries are deleted. A connectivity error during drain breaks the inner
+loop — remaining entries stay on disk for the next reconnect. A server error
+(4xx) deletes the entry — retrying a request the server actively rejected would
+only waste bandwidth.
+
+`OfflineQueueError.full` is thrown when `maxQueueSize` is exceeded. The caller
+decides whether to discard the new request, cancel an existing lower-priority
+entry, or surface an error to the user.
+
+**Design decisions:**
+
+- `QueueEntry` copies fields as primitives rather than storing `any NetworkRequest`
+  — protocol existentials cannot be made `Codable` without a known concrete type.
+- `idempotencyKey` default is a stable string fingerprint (`METHOD:url:base64body`)
+  — `hashValue` was rejected because Swift does not guarantee hash stability across
+  process launches, which would break server-side idempotency after an app restart.
+- `runDrainCycle()` is `internal` (not `private`) so tests can invoke it directly
+  without driving the reachability stream, making drain tests deterministic.
+- `NWPathMonitor` cannot be controlled in unit tests. `NetworkReachabilityMonitor`
+  has a compile-time conformance test only; behavioural testing requires a real
+  device or integration test suite.
+
+**Test coverage:**
+- `QueuePriority` raw values, `Comparable` ordering, sort stability.
+- `QueueableRequest` default TTL, default priority, idempotency key determinism,
+  key differentiation across URL/method/body, custom override.
+- `QueueEntry` field copying (including nil body), default vs injected UUID and
+  timestamp, expiry logic (fresh / expired / zero TTL), `asURLRequest` reconstruction
+  including `Idempotency-Key` injection, `Codable` round-trip, `Equatable`.
+- `DiskQueueStore` directory creation, save/overwrite/multi-file, load (empty /
+  round-trip / expired filtered / priority sort / FIFO sort / corrupt file skipped /
+  non-JSON ignored), delete (target only / no-op for missing ID), `deleteExpired`
+  (removes only expired / returns count / no-op on empty), `count` (zero / reflects
+  files / includes expired / decreases after delete).
+- `MockReachabilityMonitor` protocol conformance, initial state, `setConnected`
+  updates, stream delivery (single value / multiple in order / finish terminates).
+- `OfflineQueueEngine` enqueue fast path (success / 4xx rethrown / connectivity
+  error falls to disk), enqueue offline (disk write / field preservation), size cap,
+  cancel (removes entry / no-op for missing ID), drain cycle (success + delete /
+  expired deleted without send / connectivity error leaves entry / server error
+  deletes entry / `Idempotency-Key` header present), drain ordering (priority
+  descending / FIFO within same priority).
+
+---
+
 ### 28 May 2026 — Request Deduplication
 
 **Files added:**
@@ -155,18 +270,14 @@ hit the server in a wave; staggered delays spread that load out.
 The following modules are planned in implementation order.
 Each builds on the layer below it.
 
-1. **Offline Queue Engine** — persists failed requests to disk and replays them
-   when connectivity is restored. Requires a persistence layer (Core Data or
-   file-backed queue) and a network reachability monitor.
-
-3. **Concurrency Safety Layer** — token refresh coordination so that when an
+1. **Concurrency Safety Layer** — token refresh coordination so that when an
    auth token expires, only one refresh fires regardless of how many concurrent
    requests triggered the 401, and all waiting requests resume with the new token.
 
-4. **BGTaskScheduler Integration** — hooks into iOS background processing to
+2. **BGTaskScheduler Integration** — hooks into iOS background processing to
    drain the offline queue while the app is suspended.
 
-5. **Advanced observability** — structured request tracing, retry visualisation,
+3. **Advanced observability** — structured request tracing, retry visualisation,
    and a metrics dashboard (success/failure analytics).
 
 ---
@@ -177,9 +288,13 @@ Each builds on the layer below it.
 ┌─────────────────────────────────────┐
 │        Consumer App / Demo          │
 ├─────────────────────────────────────┤
-│     Offline Queue Engine            │  (planned)
-├─────────────────────────────────────┤
 │     Concurrency Safety Layer        │  (planned)
+├─────────────────────────────────────┤
+│     OfflineQueueEngine    ✓         │  actor — enqueue, drain, maxQueueSize
+│     DiskQueueStore        ✓         │  actor — file-per-entry JSON persistence
+│     ReachabilityMonitor   ✓         │  actor protocol + NWPathMonitor impl
+│     QueueEntry            ✓         │  Codable snapshot — unit of storage
+│     QueueableRequest      ✓         │  protocol — TTL, priority, idempotencyKey
 ├─────────────────────────────────────┤
 │     AsyncRequestEngine    ✓         │  actor — requests, retry, deduplication
 │     RequestIdentity       ✓         │  hashable key for in-flight task tracking
@@ -207,3 +322,14 @@ Each builds on the layer below it.
 - ``NetworkRequest``
 - ``NetworkError``
 - ``AsyncRequestEngine``
+
+### Offline Queue
+
+- ``QueueableRequest``
+- ``QueuePriority``
+- ``QueueEntry``
+- ``DiskQueueStore``
+- ``ReachabilityMonitoring``
+- ``NetworkReachabilityMonitor``
+- ``OfflineQueueEngine``
+- ``OfflineQueueError``
