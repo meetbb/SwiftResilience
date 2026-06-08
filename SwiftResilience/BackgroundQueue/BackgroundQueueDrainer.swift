@@ -30,7 +30,7 @@ import Foundation
 ///
 /// **1. In `AppDelegate.application(_:didFinishLaunchingWithOptions:)`:**
 ///
-/// ```swift
+/// ```
 /// drainer.register()
 /// ```
 ///
@@ -40,7 +40,7 @@ import Foundation
 /// **2. In `SceneDelegate.sceneDidEnterBackground(_:)` or
 ///    `AppDelegate.applicationDidEnterBackground(_:)`:**
 ///
-/// ```swift
+/// ```
 /// drainer.scheduleNextDrain()
 /// ```
 ///

@@ -17,6 +17,99 @@ so every piece can be understood, tested, and explained in isolation.
 
 ## Changelog
 
+### 8 Jun 2026 — Advanced Observability
+
+**Files added:**
+- `Observability/RequestEvent.swift`
+- `Observability/RequestMetricsCollector.swift`
+- `Tests/Observability/ObservabilityTests.swift`
+
+**Files updated:**
+- `Networking/AsyncRequestEngine.swift`
+
+**What was built:**
+
+A structured event emission layer that gives `AsyncRequestEngine` a full
+view of every request's lifecycle — start, retry, success, failure, and
+deduplication — without changing its public API.
+
+`RequestEvent` is a `Sendable` enum with five cases, each carrying a
+`traceID: UUID` that links all events for the same logical request.
+`.started` fires before the first attempt. `.retryScheduled(attempt:delay:)`
+fires after each retryable failure and before the sleep — `delay` tells the
+sink how long the engine *will* wait rather than how long it has waited.
+`.succeeded(statusCode:duration:attempt:)` fires on a 2xx response; `attempt`
+is zero-based so callers can distinguish first-try successes from retried ones.
+`.failed(error:attempt:)` fires when retries are exhausted or a non-retryable
+error occurs — exactly one terminal event per `.started`. `.deduplicated`
+fires when a second concurrent `send()` joins an in-flight task instead of
+starting a new network call; it carries its own fresh `traceID` so the count
+of coalesced call-sites is observable.
+
+`RequestEventSink` is a one-method `Sendable` protocol
+(`func record(_ event: RequestEvent) async`). The `async` signature means
+actor sinks receive events on their own executor via transparent actor hopping
+— no manual dispatching. Injected into `AsyncRequestEngine.init` as an
+optional parameter defaulting to `nil`, so all existing callsites compile
+unchanged. Zero overhead when nil: `eventSink?.record(...)` short-circuits
+before any enum construction or actor hop.
+
+`AsyncRequestEngine` was updated to accept the optional sink and emit events
+at key points in `executeWithRetry`. `.started` is emitted at the top of
+`executeWithRetry` (not in `send()`) to guarantee ordering: it always arrives
+at the sink before `.retryScheduled`, `.succeeded`, and `.failed` because
+those are emitted later in the same function. The task is registered in
+`inFlightTasks` before any `await` so deduplication correctness is
+unaffected by event emission.
+
+`RequestMetricsCollector` is a `public actor` implementing `RequestEventSink`.
+It accumulates five counters (`requestsStarted`, `requestsSucceeded`,
+`requestsFailed`, `retriesScheduled`, `deduplicationsHit`) and a running
+`totalSuccessDuration` sum. `snapshot() -> RequestMetrics` returns an
+immutable `Sendable` struct copy of the current state — safe to read from any
+context. `RequestMetrics` exposes two computed properties: `averageSuccessDuration`
+(nil until at least one success) and `successRate` (`succeeded / (succeeded +
+failed)`, nil until at least one completion; deduplication hits and in-progress
+requests are excluded from the denominator). `reset()` zeroes all counters for
+a new measurement window.
+
+**Design decisions:**
+
+- `.started` emitted inside `executeWithRetry`, not `send()` — this is the
+  only location that has exclusive ordering over all subsequent events for the
+  same request.
+- `successRate` denominator excludes deduplication hits — a deduplicated caller
+  made no network request, so counting it as a success would inflate the rate.
+- `retryScheduled` fires before the sleep — lets custom sinks measure actual
+  sleep duration by timestamping on `.retryScheduled` and the following attempt.
+- Pull model for `RequestMetrics` (`snapshot()` on demand, no `AsyncStream`) —
+  keeps the type dependency-free; apps wanting reactive updates can wrap in an
+  `ObservableObject` and poll.
+
+**Test coverage:**
+
+Event sequence tests (via `CapturingEventSink` actor + mock sessions):
+- Success path: 2 events, correct order, shared `traceID`, correct URL/method/
+  statusCode/attempt.
+- Retry then succeed: 3 events in order; `retryScheduled` carries `attempt: 0`
+  and correct delay; `succeeded` carries `attempt: 1`; all share `traceID`.
+- Non-retryable failure: `.started` then `.failed(attempt: 0)`.
+- Retry exhausted: `.started`, `.retryScheduled`, `.failed(attempt: 1)`.
+- Deduplication: exactly 1 `.started`, 1 `.deduplicated`, 1 `.succeeded`;
+  `deduplicated` carries a distinct `traceID`; `session.callCount == 1`.
+
+Metrics counter tests (direct `record()` calls — no engine or network):
+- Each event type increments its counter only.
+- Multi-request accumulation across all five counters.
+- `reset()` zeroes all counters; new events after reset count independently.
+- `averageSuccessDuration`: nil with no successes; equals single duration;
+  returns correct mean for multiple successes.
+- `successRate`: nil with no completions; 1.0 for all-succeeded; 0.0 for
+  all-failed; 0.75 for 3 successes + 1 failure; deduplication hits and
+  in-progress `.started` events excluded from denominator.
+
+---
+
 ### 8 Jun 2026 — BGTaskScheduler Integration
 
 **Files added:**
@@ -422,14 +515,6 @@ hit the server in a wave; staggered delays spread that load out.
 
 ---
 
-## Planned features
-
-The following modules are planned in implementation order.
-Each builds on the layer below it.
-
-1. **Advanced observability** — structured request tracing, retry visualisation,
-   and a metrics dashboard (success/failure analytics).
-
 ---
 
 ## Architecture layers
@@ -437,6 +522,10 @@ Each builds on the layer below it.
 ```
 ┌─────────────────────────────────────┐
 │        Consumer App / Demo          │
+├─────────────────────────────────────┤
+│     RequestMetricsCollector    ✓    │  actor — accumulates lifecycle counters
+│     RequestEvent               ✓    │  Sendable enum — 5 observable moments
+│     RequestEventSink           ✓    │  protocol — pluggable observability sink
 ├─────────────────────────────────────┤
 │     AuthenticatedRequestEngine ✓    │  actor — token injection, 401 retry
 │     TokenRefreshCoordinator    ✓    │  actor — coalesces concurrent refreshes
@@ -466,6 +555,13 @@ Each builds on the layer below it.
 ---
 
 ## Topics
+
+### Observability
+
+- ``RequestEvent``
+- ``RequestEventSink``
+- ``RequestMetrics``
+- ``RequestMetricsCollector``
 
 ### Retry
 
