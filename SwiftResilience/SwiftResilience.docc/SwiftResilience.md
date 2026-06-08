@@ -17,6 +17,86 @@ so every piece can be understood, tested, and explained in isolation.
 
 ## Changelog
 
+### 8 Jun 2026 — Concurrency Safety Layer
+
+**Files added:**
+- `ConcurrencySafety/TokenProvider.swift`
+- `ConcurrencySafety/TokenRefreshCoordinator.swift`
+- `ConcurrencySafety/AuthenticatedRequestEngine.swift`
+- `Tests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift`
+- `Tests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift`
+
+**What was built:**
+
+A transparent token injection and 401-refresh coordination layer built in three
+focused types that compose on top of `AsyncRequestEngine`.
+
+`TokenProvider` is the single integration point between SwiftResilience and the
+consuming app's auth layer. The developer implements it once — typically in
+their auth module — with two methods: `currentToken()` reads the current access
+token from the app's token store (Keychain, in-memory cache, etc.) and must be
+fast since it is called before every request; `refreshToken()` performs the
+actual network call to exchange a refresh token for a new access token, persists
+the result, and returns it. The protocol refines `Sendable` so implementations
+that hold mutable state must be actors or otherwise thread-safe.
+
+`TokenRefreshCoordinator` is an actor that wraps `TokenProvider` and guarantees
+that `refreshToken()` is called at most once per expiry event regardless of how
+many concurrent requests triggered a 401. The mechanism mirrors the
+request-deduplication pattern already in `AsyncRequestEngine`: the first caller
+finds `refreshTask == nil`, creates a `Task<String, Error>`, stores it
+atomically (the actor boundary prevents two callers from both seeing `nil`), and
+suspends at `await task.value`. All subsequent callers find the in-progress task
+and await its cached value — no second network call. `defer { refreshTask = nil }`
+clears the reference on completion so the next expiry cycle starts a fresh
+refresh. Failures are also coalesced — every waiting caller receives the same
+error, and the lifecycle resets so the next 401 can begin a new attempt.
+
+`AuthenticatedRequestEngine` is an actor that wraps `AsyncRequestEngine` and
+owns the retry orchestration: read `coordinator.currentToken()`, inject it as
+`Authorization: Bearer <token>`, send, catch only 401, call
+`coordinator.refresh()` (coalesced), retry once with the new token. If the
+retry is also 401 the error propagates — the caller should redirect to login.
+All non-401 errors are rethrown without touching the token lifecycle. The
+private `AuthenticatedRequest<Wrapped>` adapter wraps any `NetworkRequest` and
+merges the token into its `headers` dictionary; a new instance is created for
+each attempt so the caller's original request is never mutated. Token header
+name and prefix are configurable (`"Authorization"` / `"Bearer "` by default).
+
+**Design decisions:**
+
+- Refresh is reactive (on 401), not proactive (on expiry timestamp). Avoids
+  clock-skew errors, over-refreshing of valid tokens, and the test complexity
+  of mocking system clocks.
+- `TokenRefreshCoordinator` delegates `currentToken()` to the provider rather
+  than caching internally — the provider owns storage and knows when its value
+  is stale.
+- `send()` retries exactly once after refresh — a second 401 propagates
+  immediately, no infinite loop.
+- `TokenAwareSession` (in tests) drives correctness from the token value rather
+  than call order, making concurrent tests fully deterministic.
+
+**Test coverage:**
+- `TokenRefreshCoordinator` — `currentToken` delegation and nil; single
+  refresh returns correct token and calls provider once; sequential refreshes
+  each start a fresh Task; failure propagates; retry after failure succeeds.
+- `TokenRefreshCoordinator` concurrent — 5 concurrent `refresh()` calls with
+  50ms delay coalesce into one provider call, all 5 receive the same token;
+  concurrent failure propagates to all callers; sequential call after batch
+  starts new refresh.
+- `AuthenticatedRequestEngine` token injection — default `Authorization: Bearer`
+  header; nil token sends without header; custom header name; custom prefix;
+  existing request headers preserved.
+- `AuthenticatedRequestEngine` 401 handling — 401 triggers one refresh and
+  successful retry; second consecutive 401 throws without further refresh; 403
+  rethrows without refresh; 500 rethrows without refresh; refresh error
+  propagates to caller.
+- `AuthenticatedRequestEngine` concurrency — 4 concurrent sends all get 401
+  (old token), exactly one `refreshToken()` call fires, all 4 retries succeed
+  (new token), total session calls = 8.
+
+---
+
 ### 7 Jun 2026 — Offline Queue Engine
 
 **Files added:**
@@ -270,14 +350,10 @@ hit the server in a wave; staggered delays spread that load out.
 The following modules are planned in implementation order.
 Each builds on the layer below it.
 
-1. **Concurrency Safety Layer** — token refresh coordination so that when an
-   auth token expires, only one refresh fires regardless of how many concurrent
-   requests triggered the 401, and all waiting requests resume with the new token.
-
-2. **BGTaskScheduler Integration** — hooks into iOS background processing to
+1. **BGTaskScheduler Integration** — hooks into iOS background processing to
    drain the offline queue while the app is suspended.
 
-3. **Advanced observability** — structured request tracing, retry visualisation,
+2. **Advanced observability** — structured request tracing, retry visualisation,
    and a metrics dashboard (success/failure analytics).
 
 ---
@@ -288,7 +364,9 @@ Each builds on the layer below it.
 ┌─────────────────────────────────────┐
 │        Consumer App / Demo          │
 ├─────────────────────────────────────┤
-│     Concurrency Safety Layer        │  (planned)
+│     AuthenticatedRequestEngine ✓    │  actor — token injection, 401 retry
+│     TokenRefreshCoordinator    ✓    │  actor — coalesces concurrent refreshes
+│     TokenProvider              ✓    │  protocol — app-supplied token lifecycle
 ├─────────────────────────────────────┤
 │     OfflineQueueEngine    ✓         │  actor — enqueue, drain, maxQueueSize
 │     DiskQueueStore        ✓         │  actor — file-per-entry JSON persistence
@@ -322,6 +400,12 @@ Each builds on the layer below it.
 - ``NetworkRequest``
 - ``NetworkError``
 - ``AsyncRequestEngine``
+
+### Concurrency Safety
+
+- ``TokenProvider``
+- ``TokenRefreshCoordinator``
+- ``AuthenticatedRequestEngine``
 
 ### Offline Queue
 
