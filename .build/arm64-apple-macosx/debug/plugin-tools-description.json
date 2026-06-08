@@ -1,0 +1,1182 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.xctest/Contents/MacOS/SwiftResiliencePackageTests",
+      "packagePath" : "/Users/meet/Documents/SwiftResilience",
+      "productName" : "SwiftResiliencePackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.SwiftResilience-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/sources",
+      "importPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueDrainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/AuthenticatedRequestEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenRefreshCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/AsyncRequestEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/HTTPMethod.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkSession.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/RequestIdentity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestEvent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestMetricsCollector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/DiskQueueStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/OfflineQueueEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueEntry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueableRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/ReachabilityMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/ExponentialRetryPolicy.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/RetryPolicy.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftResilience",
+      "moduleOutputPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilience.swiftmodule",
+      "objects" : [
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueDrainer.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueProtocols.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AuthenticatedRequestEngine.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenProvider.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenRefreshCoordinator.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AsyncRequestEngine.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/HTTPMethod.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkError.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkRequest.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkSession.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestIdentity.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestEvent.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestMetricsCollector.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/DiskQueueStore.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/OfflineQueueEngine.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueEntry.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueableRequest.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ReachabilityMonitor.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ExponentialRetryPolicy.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RetryPolicy.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/include/SwiftResilience-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-enable-experimental-feature",
+        "StrictConcurrency",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swiftresilience"
+      ],
+      "outputFileMapPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueDrainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AuthenticatedRequestEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenRefreshCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AsyncRequestEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/HTTPMethod.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkSession.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestIdentity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestEvent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestMetricsCollector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/DiskQueueStore.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/OfflineQueueEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueEntry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueableRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ReachabilityMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ExponentialRetryPolicy.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RetryPolicy.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilience.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueDrainer.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueProtocols.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/AuthenticatedRequestEngine.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenProvider.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenRefreshCoordinator.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/AsyncRequestEngine.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/HTTPMethod.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkError.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkRequest.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkSession.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/RequestIdentity.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestEvent.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestMetricsCollector.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/DiskQueueStore.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/OfflineQueueEngine.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueEntry.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueableRequest.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/ReachabilityMonitor.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/ExponentialRetryPolicy.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/RetryPolicy.swift"
+      ],
+      "tempsPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SwiftResiliencePackageTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/sources",
+      "importPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilienceTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftResiliencePackageTests",
+      "moduleOutputPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResiliencePackageTests.swiftmodule",
+      "objects" : [
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/include/SwiftResiliencePackageTests-Swift.h",
+        "-color-diagnostics",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swiftresilience"
+      ],
+      "outputFileMapPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResiliencePackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SwiftResilienceTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/sources",
+      "importPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/BackgroundQueue/BackgroundQueueDrainerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ExponentialRetryPolicyTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Networking/AsyncRequestEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Observability/ObservabilityTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/DiskQueueStoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/OfflineQueueEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueEntryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueableRequestTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/ReachabilityMonitorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/SwiftResilienceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilience.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftResilienceTests",
+      "moduleOutputPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilienceTests.swiftmodule",
+      "objects" : [
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.swift.o",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swiftresilience"
+      ],
+      "outputFileMapPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules/SwiftResilienceTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/BackgroundQueue/BackgroundQueueDrainerTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ExponentialRetryPolicyTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Networking/AsyncRequestEngineTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Observability/ObservabilityTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/DiskQueueStoreTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/OfflineQueueEngineTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueEntryTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueableRequestTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/ReachabilityMonitorTests.swift",
+        "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/SwiftResilienceTests.swift"
+      ],
+      "tempsPath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "SwiftResilience" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftResilience",
+      "-package-name",
+      "swiftresilience",
+      "-c",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueDrainer.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueProtocols.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/AuthenticatedRequestEngine.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenProvider.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenRefreshCoordinator.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/AsyncRequestEngine.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/HTTPMethod.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkError.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkRequest.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkSession.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/RequestIdentity.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestEvent.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestMetricsCollector.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/DiskQueueStore.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/OfflineQueueEngine.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueEntry.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueableRequest.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/ReachabilityMonitor.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/ExponentialRetryPolicy.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/RetryPolicy.swift",
+      "-I",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/include/SwiftResilience-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-enable-experimental-feature",
+      "StrictConcurrency",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swiftresilience",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SwiftResiliencePackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftResiliencePackageTests",
+      "-package-name",
+      "swiftresilience",
+      "-c",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift",
+      "-I",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/include/SwiftResiliencePackageTests-Swift.h",
+      "-color-diagnostics",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swiftresilience",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SwiftResilienceTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftResilienceTests",
+      "-package-name",
+      "swiftresilience",
+      "-c",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/BackgroundQueue/BackgroundQueueDrainerTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ExponentialRetryPolicyTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Networking/AsyncRequestEngineTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Observability/ObservabilityTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/DiskQueueStoreTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/OfflineQueueEngineTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueEntryTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueableRequestTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/ReachabilityMonitorTests.swift",
+      "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/SwiftResilienceTests.swift",
+      "-I",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swiftresilience",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "SwiftResilience" : [
+
+    ],
+    "SwiftResiliencePackageTests" : [
+      "SwiftResilienceTests",
+      "SwiftResilience"
+    ],
+    "SwiftResilienceTests" : [
+      "SwiftResilience"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueDrainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/BackgroundQueue/BackgroundQueueProtocols.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/AuthenticatedRequestEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenProvider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/ConcurrencySafety/TokenRefreshCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/AsyncRequestEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/HTTPMethod.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/NetworkSession.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Networking/RequestIdentity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestEvent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Observability/RequestMetricsCollector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/DiskQueueStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/OfflineQueueEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueEntry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/QueueableRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/OfflineQueue/ReachabilityMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/ExponentialRetryPolicy.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilience/Retry/RetryPolicy.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/sources"
+    },
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/sources"
+    },
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AsyncRequestEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/AuthenticatedRequestEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueDrainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/BackgroundQueueProtocols.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/DiskQueueStore.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ExponentialRetryPolicy.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/HTTPMethod.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/NetworkSession.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/OfflineQueueEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueEntry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/QueueableRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/ReachabilityMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestEvent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestIdentity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RequestMetricsCollector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/RetryPolicy.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenProvider.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilience.build/TokenRefreshCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/BackgroundQueue/BackgroundQueueDrainerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ExponentialRetryPolicyTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Networking/AsyncRequestEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Observability/ObservabilityTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/DiskQueueStoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/OfflineQueueEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueEntryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueableRequestTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/ReachabilityMonitorTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/SwiftResilienceTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/sources"
+    },
+    "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

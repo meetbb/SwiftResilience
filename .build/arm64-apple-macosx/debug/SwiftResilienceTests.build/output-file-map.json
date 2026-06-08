@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/primary.swiftdeps"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/BackgroundQueue/BackgroundQueueDrainerTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/BackgroundQueueDrainerTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/AuthenticatedRequestEngineTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AuthenticatedRequestEngineTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ConcurrencySafety/TokenRefreshCoordinatorTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/TokenRefreshCoordinatorTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/ExponentialRetryPolicyTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ExponentialRetryPolicyTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Networking/AsyncRequestEngineTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/AsyncRequestEngineTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/Observability/ObservabilityTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ObservabilityTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/DiskQueueStoreTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/DiskQueueStoreTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/OfflineQueueEngineTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/OfflineQueueEngineTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueEntryTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueEntryTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/QueueableRequestTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/QueueableRequestTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/OfflineQueue/ReachabilityMonitorTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/ReachabilityMonitorTests.dia"
+  },
+  "/Users/meet/Documents/SwiftResilience/SwiftResilienceTests/SwiftResilienceTests.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResilienceTests.build/SwiftResilienceTests.dia"
+  }
+}

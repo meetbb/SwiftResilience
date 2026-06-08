@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/primary.swiftdeps"
+  },
+  "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.derived/runner.swift": {
+    "dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.d",
+    "object": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/meet/Documents/SwiftResilience/.build/arm64-apple-macosx/debug/SwiftResiliencePackageTests.build/runner.dia"
+  }
+}
