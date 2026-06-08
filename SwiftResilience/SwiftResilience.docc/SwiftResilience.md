@@ -17,6 +17,83 @@ so every piece can be understood, tested, and explained in isolation.
 
 ## Changelog
 
+### 8 Jun 2026 — BGTaskScheduler Integration
+
+**Files added:**
+- `BackgroundQueue/BackgroundQueueProtocols.swift`
+- `BackgroundQueue/BackgroundQueueDrainer.swift`
+- `Tests/BackgroundQueue/BackgroundQueueDrainerTests.swift`
+
+**What was built:**
+
+A two-type integration layer that connects `OfflineQueueEngine` to iOS's
+`BGTaskScheduler` so pending requests drain while the app is suspended.
+
+The gap it fills: `OfflineQueueEngine` drains on connectivity events while the
+app is foregrounded. If the device comes online while the app is backgrounded,
+the drain loop is not running and queued requests sit on disk until the user
+next opens the app. `BackgroundQueueDrainer` closes this by registering a
+`BGProcessingTask` that iOS runs at the next suitable background opportunity.
+
+`BackgroundTaskHandling` is an `AnyObject` protocol with two members —
+`expirationHandler` and `setTaskCompleted(success:)` — that match `BGTask`'s
+existing interface. `extension BGTask: BackgroundTaskHandling {}` is an empty
+retroactive conformance, zero implementation needed.
+
+`BackgroundTaskScheduling` is an `AnyObject` protocol with `register` and
+`submit`. The `launchHandler` parameter uses `(any BackgroundTaskHandling) -> Void`
+rather than `(BGTask) -> Void`. Bridging is provided by
+`SystemBackgroundTaskScheduler` — a wrapper singleton around
+`BGTaskScheduler.shared`. A retroactive extension on `BGTaskScheduler` was
+rejected because its existing `register` overload (taking `(BGTask) -> Void`)
+would create an ambiguous call site.
+
+`BackgroundQueueDrainer` is the public integration type. `register()` must be
+called before `application(_:didFinishLaunchingWithOptions:)` returns — iOS
+silently ignores later registrations. `scheduleNextDrain()` submits a
+`BGProcessingTaskRequest` with `requiresNetworkConnectivity = true` and
+`requiresExternalPower = false`; call it from every
+`sceneDidEnterBackground`/`applicationDidEnterBackground` transition.
+
+`handleTask(_:)` installs the expiration handler synchronously before creating
+the drain `Task` — no window where iOS could fire expiration with no handler.
+The drain Task runs `OfflineQueueEngine.runDrainCycle()` and calls
+`setTaskCompleted(success: true)` on completion. If iOS fires the expiration
+handler first, `drainTask.cancel()` is called (cooperative — exits at the next
+`guard !Task.isCancelled` checkpoint in the drain loop), then
+`setTaskCompleted(success: false)`. `setTaskCompleted` is idempotent so
+concurrent calls from both paths are safe.
+
+All types are wrapped in `#if canImport(BackgroundTasks)` — the framework is
+iOS/Mac Catalyst only.
+
+**Design decisions:**
+
+- `BGProcessingTask` was chosen over `BGAppRefreshTask` for its larger time
+  budget (minutes vs ~30s) and configurable network requirement. A queue of
+  pending requests involves N sequential network calls; the 30-second budget
+  of `BGAppRefreshTask` risks expiration mid-drain.
+- `SystemBackgroundTaskScheduler` wrapper (not a `BGTaskScheduler` extension)
+  avoids an ambiguous `register` overload between the system's `(BGTask) -> Void`
+  signature and our protocol's `(any BackgroundTaskHandling) -> Void`.
+- `handleTask` uses a local `var drainTask: Task?` captured by reference in the
+  expiration closure. Swift closures capture `var` by reference, so by the time
+  the closure executes, `drainTask` is always non-nil.
+
+**Test coverage:**
+- `register()` records identifier and does not submit a task request.
+- `scheduleNextDrain()` submits a `BGProcessingTaskRequest` with the correct
+  identifier, `requiresNetworkConnectivity = true`, `requiresExternalPower = false`.
+- Multiple `scheduleNextDrain()` calls each submit a request.
+- `handleTask` installs `expirationHandler` synchronously (verified with no
+  yield between fireHandler and assertion).
+- Successful drain → `setTaskCompleted(success: true)` after 200ms.
+- Expiration fires before drain Task runs → `setTaskCompleted(success: false)`.
+- After expiration + 200ms, cancelled drain Task has not called
+  `setTaskCompleted` a second time.
+
+---
+
 ### 8 Jun 2026 — Concurrency Safety Layer
 
 **Files added:**
@@ -350,10 +427,7 @@ hit the server in a wave; staggered delays spread that load out.
 The following modules are planned in implementation order.
 Each builds on the layer below it.
 
-1. **BGTaskScheduler Integration** — hooks into iOS background processing to
-   drain the offline queue while the app is suspended.
-
-2. **Advanced observability** — structured request tracing, retry visualisation,
+1. **Advanced observability** — structured request tracing, retry visualisation,
    and a metrics dashboard (success/failure analytics).
 
 ---
@@ -367,6 +441,10 @@ Each builds on the layer below it.
 │     AuthenticatedRequestEngine ✓    │  actor — token injection, 401 retry
 │     TokenRefreshCoordinator    ✓    │  actor — coalesces concurrent refreshes
 │     TokenProvider              ✓    │  protocol — app-supplied token lifecycle
+├─────────────────────────────────────┤
+│     BackgroundQueueDrainer     ✓    │  BGProcessingTask → runDrainCycle()
+│     BackgroundTaskScheduling   ✓    │  protocol — abstracts BGTaskScheduler
+│     BackgroundTaskHandling     ✓    │  protocol — abstracts BGTask
 ├─────────────────────────────────────┤
 │     OfflineQueueEngine    ✓         │  actor — enqueue, drain, maxQueueSize
 │     DiskQueueStore        ✓         │  actor — file-per-entry JSON persistence
@@ -406,6 +484,13 @@ Each builds on the layer below it.
 - ``TokenProvider``
 - ``TokenRefreshCoordinator``
 - ``AuthenticatedRequestEngine``
+
+### Background Queue
+
+- ``BackgroundTaskHandling``
+- ``BackgroundTaskScheduling``
+- ``SystemBackgroundTaskScheduler``
+- ``BackgroundQueueDrainer``
 
 ### Offline Queue
 
