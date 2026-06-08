@@ -188,6 +188,14 @@ public actor OfflineQueueEngine {
         try await store.save(entry)
     }
 
+    /// Returns the number of entries currently persisted in the queue.
+    ///
+    /// Includes expired entries that have not yet been swept by a drain cycle.
+    /// Useful for UI badges and monitoring.
+    public func pendingCount() async -> Int {
+        await store.count()
+    }
+
     /// Removes a queued entry by ID without sending it.
     ///
     /// A no-op if the entry has already been sent or expired.
